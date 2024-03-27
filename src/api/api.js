@@ -2,8 +2,8 @@ import axios from "axios";
 
 
  class Api {
-  HOST = process.env.NODE_ENV !== 'development'? process.env.REACT_APP_HOST_DEV : process.env.REACT_APP_HOST_PROD;
-  PORT = process.env.REACT_APP_SERVER_PORT
+  HOST = 'http://193.0.61.232:'  //process.env.NODE_ENV !== 'development'? process.env.REACT_APP_HOST_DEV : process.env.REACT_APP_HOST_PROD;
+  PORT = 7000; //process.env.REACT_APP_SERVER_PORT
   async get(url, params){
     try {      
       // console.log({params})
