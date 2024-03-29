@@ -23,12 +23,13 @@ class Api {
     }
   }
 
-  async post(url, params){    
+  async post(url, params, configCustom={}){    
     try {
       const config = {
         headers: {
           'Content-Type': 'multipart/form-data',
-        }
+        },
+        ...configCustom
       };
       const res = await this.createAxios.post(this.HOST + this.PORT + url, params, config)
       return res.data

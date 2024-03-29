@@ -1,14 +1,18 @@
 import React from 'react'
 import { InboxOutlined } from '@ant-design/icons';
 import type { UploadProps } from 'antd';
-import { Button, message, Upload } from 'antd';
+import { Button, message, Result, Upload } from 'antd';
 import Offset from '../../Views/Offset/Offset';
 
 export default function Setting({
+  errorUpload,
+  uploadPercent,
   isActiveButton,
   handleSendFile,
   handlerUploadFile,
 }:{
+  errorUpload: string,
+  uploadPercent: number,
   handleSendFile: any,
   isActiveButton: boolean,
   handlerUploadFile: any
@@ -53,13 +57,22 @@ export default function Setting({
     або перетягніть у обвидену пунтиром область.
     </p>
   </Dragger>
-  <Offset  mb={50} />
-      
+  <Offset  mb={20} />
+      {
+        !!errorUpload?
+        <Result
+          status="error"
+          title="Помилка!!!"
+          subTitle={errorUpload}
+        >
+        </Result>
+        : null
+      }
       <Button
         disabled={!isActiveButton}
         onClick={handleSendFile}
       >
-        завантажити 
+        завантажити {uploadPercent? uploadPercent + '%' : null}
       </Button>    
     </>
   )

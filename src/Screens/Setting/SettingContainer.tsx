@@ -17,11 +17,19 @@ class SettingContainer extends Component<any,any> {
       file: null
     }))  
   }
+  
+  callback = () => {
+    this.setState( (state: {}) => ({
+      ...state,
+      isActiveButton: false,
+      file: null
+    }))
+  }
 
   handleSendFile = () => {
     if(this.state.file){
       // console.log(this.state.file)
-      this.props.dispatch('sendXlsFile', {file:this.state.file})
+      this.props.dispatch('sendXlsFile', {file:this.state.file, callback: this.callback})
     }else{
       message.error('Помилка завантаження')
     }
@@ -40,8 +48,11 @@ class SettingContainer extends Component<any,any> {
     }))
   }
   render() {
+    console.log(this.props.errorUpload)
     return (
       <Setting
+        errorUpload={this.props.errorUpload}
+        uploadPercent={this.props.uploadPercent}
         handleSendFile={this.handleSendFile}
         isActiveButton={this.state.isActiveButton}
         handlerUploadFile={this.handlerUploadFile}
@@ -51,6 +62,7 @@ class SettingContainer extends Component<any,any> {
 }
 
 export default connectStoreon(
-
+  'errorUpload',
+  'uploadPercent',
   SettingContainer
 )
